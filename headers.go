@@ -50,5 +50,8 @@ func main() {
 	http.HandleFunc("/ipport", ipPortHandler)
 	http.HandleFunc("/headers", headersHandler)
 
-	http.ListenAndServe(addr, nil)
+	err := http.ListenAndServe(addr, nil)
+
+	fmt.Fprintln(os.Stderr, err)
+	os.Exit(1)
 }
