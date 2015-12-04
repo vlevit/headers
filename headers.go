@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"strings"
 	"sort"
 )
@@ -38,10 +39,16 @@ func headersHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+
+	addr := ":8181";
+	if (len(os.Args) > 1) {
+		addr = os.Args[1]
+	}
+
 	http.HandleFunc("/", ipHandler)
 	http.HandleFunc("/port", portHandler)
 	http.HandleFunc("/ipport", ipPortHandler)
 	http.HandleFunc("/headers", headersHandler)
 
-	http.ListenAndServe(":8181", nil)
+	http.ListenAndServe(addr, nil)
 }
